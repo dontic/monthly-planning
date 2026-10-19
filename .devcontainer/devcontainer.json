@@ -1,0 +1,15 @@
+{
+  "name": "monthly-planning",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
+  "forwardPorts": [5173, 3000],
+  "portsAttributes": {
+    "5173": { "label": "App (dev)", "onAutoForward": "openBrowser" },
+    "3000": { "label": "API" }
+  },
+  "postCreateCommand": "npm install",
+  "customizations": {
+    "vscode": {
+      "extensions": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode"]
+    }
+  }
+}

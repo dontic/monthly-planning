@@ -1,0 +1,591 @@
+:root {
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --surface-2: #f0f2f5;
+  --border: #e2e5ea;
+  --text: #1d2330;
+  --muted: #6b7385;
+  --accent: #4f7cff;
+  --accent-text: #ffffff;
+  --danger: #d64545;
+  --warn-bg: rgba(242, 153, 74, 0.12);
+  --over-bg: rgba(235, 87, 87, 0.14);
+  --current-bg: rgba(79, 124, 255, 0.07);
+  --hover-bg: rgba(29, 35, 48, 0.05);
+  --weekday-line: #e07b24;
+  --week-line: #c03a3a;
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.08);
+  --radius: 10px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #12151b;
+    --surface: #1a1e26;
+    --surface-2: #232834;
+    --border: #2d3340;
+    --text: #e6e9ef;
+    --muted: #949bab;
+    --accent: #6b91ff;
+    --danger: #ef6b6b;
+    --warn-bg: rgba(242, 153, 74, 0.14);
+    --over-bg: rgba(235, 87, 87, 0.18);
+    --current-bg: rgba(107, 145, 255, 0.1);
+    --hover-bg: rgba(255, 255, 255, 0.05);
+    --weekday-line: #f2a35e;
+    --week-line: #f07a7a;
+    --shadow: none;
+    color-scheme: dark;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.45 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+h1,
+h2 {
+  margin: 0;
+  font-weight: 600;
+}
+h1 {
+  font-size: 18px;
+}
+h2 {
+  font-size: 15px;
+}
+
+input,
+select,
+button {
+  font: inherit;
+  color: inherit;
+}
+
+input[type='text'],
+input[type='number'],
+select {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 8px;
+  min-width: 0;
+}
+input:focus-visible,
+select:focus-visible,
+button:focus-visible,
+[role='button']:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+/* ---------- buttons ---------- */
+
+.btn {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 6px;
+  padding: 5px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn:hover {
+  background: var(--surface-2);
+}
+.btn.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+.btn.primary:hover {
+  filter: brightness(1.07);
+}
+.btn.ghost {
+  border-color: transparent;
+  background: transparent;
+  color: var(--muted);
+}
+.btn.ghost:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+.btn.danger {
+  color: var(--danger);
+}
+.btn.icon {
+  padding: 2px 10px;
+  font-size: 18px;
+  line-height: 1.2;
+}
+.link {
+  border: 0;
+  background: none;
+  padding: 0;
+  color: var(--accent);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* ---------- layout ---------- */
+
+.app {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.save-status {
+  font-size: 12px;
+  color: var(--muted);
+}
+.save-status.error {
+  color: var(--danger);
+}
+.year-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.year-label {
+  font-weight: 600;
+  min-width: 140px;
+  text-align: center;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.panel,
+.chart-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+}
+
+.fatal {
+  max-width: 560px;
+  margin: 80px auto;
+  padding: 0 16px;
+  color: var(--muted);
+}
+.fatal h1 {
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+/* ---------- project panel ---------- */
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.empty,
+.hint {
+  color: var(--muted);
+  margin: 10px 0;
+}
+.hint {
+  font-size: 12px;
+}
+
+.project-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.project {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  position: relative;
+}
+.project.selected {
+  border-color: var(--border);
+  background: var(--surface-2);
+}
+.project.dragging {
+  opacity: 0.4;
+}
+.project.drop-before::before,
+.project.drop-after::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+.project.drop-before::before {
+  top: -3px;
+}
+.project.drop-after::after {
+  bottom: -3px;
+}
+
+.project-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 8px 7px 2px;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+.project-row:hover {
+  background: var(--hover-bg);
+}
+.handle {
+  border: 0;
+  background: none;
+  cursor: grab;
+  color: var(--muted);
+  padding: 0 4px;
+  font-size: 14px;
+  line-height: 1;
+  border-radius: 4px;
+}
+.swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex: none;
+}
+.project-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+}
+.project-meta {
+  color: var(--muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* ---------- editor ---------- */
+
+.editor {
+  padding: 4px 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.field > span {
+  font-size: 12px;
+  color: var(--muted);
+}
+.colors {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.color-chip {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  padding: 0;
+  cursor: pointer;
+}
+.color-chip.active {
+  box-shadow: 0 0 0 2px var(--surface-2), 0 0 0 4px var(--text);
+}
+input[type='color'] {
+  width: 28px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: none;
+  cursor: pointer;
+}
+.hours-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+.hours-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.hours-cell span {
+  font-size: 11px;
+  color: var(--muted);
+}
+.hours-cell input {
+  width: 100%;
+}
+.editor-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ---------- chart ---------- */
+
+.chart-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+}
+.toggle label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  color: var(--text);
+}
+.toggle .cap {
+  width: 56px;
+}
+.dash {
+  width: 22px;
+  border-top: 2px dashed;
+}
+.dash.weekday {
+  color: var(--weekday-line);
+}
+.dash.week {
+  color: var(--week-line);
+}
+
+.chart-wrap {
+  position: relative;
+  width: 100%;
+}
+.chart-wrap svg {
+  display: block;
+  overflow: visible;
+}
+
+.col-bg {
+  fill: transparent;
+}
+.col-bg.current {
+  fill: var(--current-bg);
+}
+.col-bg.over-weekday {
+  fill: var(--warn-bg);
+}
+.col-bg.over-week {
+  fill: var(--over-bg);
+}
+.col-bg.hover {
+  fill: var(--hover-bg);
+}
+
+.grid {
+  stroke: var(--border);
+  stroke-width: 1;
+}
+.axis {
+  stroke: var(--muted);
+  stroke-width: 1;
+}
+.tick {
+  fill: var(--muted);
+  font-size: 11px;
+}
+.month text {
+  fill: var(--muted);
+  font-size: 12px;
+}
+.month.current text {
+  fill: var(--accent);
+  font-weight: 600;
+}
+.month .year {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.band {
+  stroke: var(--surface);
+  stroke-width: 1;
+  stroke-linejoin: round;
+  opacity: 0.92;
+  transition: d 0.25s ease;
+}
+.band-label {
+  font-size: 12px;
+  font-weight: 600;
+  fill: #ffffff;
+  paint-order: stroke;
+  stroke: rgba(0, 0, 0, 0.35);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.threshold line {
+  stroke-width: 1.5;
+  stroke-dasharray: 6 5;
+}
+.threshold text {
+  font-size: 11px;
+  font-weight: 600;
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 3px;
+}
+.threshold.weekday line {
+  stroke: var(--weekday-line);
+}
+.threshold.weekday text {
+  fill: var(--weekday-line);
+}
+.threshold.week line {
+  stroke: var(--week-line);
+}
+.threshold.week text {
+  fill: var(--week-line);
+}
+
+.hit {
+  fill: transparent;
+}
+
+.chart-empty {
+  position: absolute;
+  inset: 0 0 48px 48px;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.tooltip {
+  position: absolute;
+  z-index: 2;
+  min-width: 190px;
+  max-width: 260px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(16, 24, 40, 0.15);
+  padding: 10px 12px;
+  pointer-events: none;
+  font-size: 13px;
+}
+.tooltip-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.tooltip ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.tooltip li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.tooltip-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tooltip-value {
+  font-variant-numeric: tabular-nums;
+}
+.tooltip-empty {
+  color: var(--muted);
+}
+.tooltip-total {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+  margin-top: 6px;
+  padding-top: 6px;
+}
+.tooltip-free {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 2px;
+}
+.tooltip-free.over {
+  color: var(--danger);
+}
+
+.chart-foot {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+.chart-foot strong {
+  color: var(--text);
+}
+.warn {
+  color: var(--danger);
+}
+
+/* On narrow screens the chart comes first; the project list follows. */
+@media (max-width: 900px) {
+  .chart-card {
+    order: -1;
+  }
+}
