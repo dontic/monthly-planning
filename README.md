@@ -13,7 +13,11 @@ cycle, keyed by its start year) and is saved automatically on every change.
 docker compose up -d --build
 ```
 
-Open http://localhost:4817. The `data/` folder is mounted into the container, so your file stays on disk.
+Open http://localhost:4817, or `http://<host-ip>:4817` from other devices on your network. The `data/`
+folder is mounted into the container, so your file stays on disk.
+
+There is no login: anyone who can reach the port can view and edit your plan. To keep it to the host
+machine only, change the port mapping in `docker-compose.yml` to `"127.0.0.1:4817:4817"`.
 
 ## Develop
 

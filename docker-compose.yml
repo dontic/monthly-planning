@@ -2,7 +2,7 @@ services:
   planner:
     build: .
     ports:
-      - "127.0.0.1:4817:4817"
+      - "4817:4817"
     volumes:
       - ./data:/app/data
     restart: unless-stopped
