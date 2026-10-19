@@ -1,10 +1,10 @@
 {
   "name": "monthly-planning",
   "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
-  "forwardPorts": [5173, 3000],
+  "forwardPorts": [5173, 4817],
   "portsAttributes": {
     "5173": { "label": "App (dev)", "onAutoForward": "openBrowser" },
-    "3000": { "label": "API" }
+    "4817": { "label": "API" }
   },
   "postCreateCommand": "npm install",
   "customizations": {

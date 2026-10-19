@@ -13,19 +13,19 @@ cycle, keyed by its start year) and is saved automatically on every change.
 docker compose up -d --build
 ```
 
-Open http://localhost:3000. The `data/` folder is mounted into the container, so your file stays on disk.
+Open http://localhost:4817. The `data/` folder is mounted into the container, so your file stays on disk.
 
 ## Develop
 
 Open the folder in VS Code and choose **Reopen in Container** (Node is preinstalled there), then:
 
 ```sh
-npm run dev      # API on :3000 + Vite on :5173 (open this one)
+npm run dev      # API on :4817 + Vite on :5173 (open this one)
 npm run build    # type-check + production build
-npm start        # serve the built app and API on :3000
+npm start        # serve the built app and API on :4817
 ```
 
-Environment variables: `PORT` (3000), `HOST` (127.0.0.1), `DATA_FILE` (`data/planning.json`).
+Environment variables: `PORT` (4817), `HOST` (127.0.0.1), `DATA_FILE` (`data/planning.json`).
 
 ## Layout
 

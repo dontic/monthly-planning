@@ -5,7 +5,7 @@ import path from 'node:path';
 import { defaultData, isPlanningData, migrate, type PlanningData } from '../shared/data';
 import { planningYearStart } from '../shared/cycle';
 
-const PORT = Number(process.env.PORT ?? 3000);
+const PORT = Number(process.env.PORT ?? 4817);
 const HOST = process.env.HOST ?? '127.0.0.1';
 const DATA_FILE = path.resolve(process.env.DATA_FILE ?? 'data/planning.json');
 const DIST_DIR = path.resolve('dist');
