@@ -31,6 +31,16 @@ export function ProjectEditor({ project, months, onChange, onDelete }: Props) {
         />
       </label>
 
+      <label className="field">
+        <span>Description</span>
+        <textarea
+          rows={3}
+          value={project.description ?? ''}
+          placeholder="What this project is, and what it isn't"
+          onChange={(e) => onChange({ ...project, description: e.target.value || undefined })}
+        />
+      </label>
+
       <div className="field">
         <span>Color</span>
         <div className="colors">
