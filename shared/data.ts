@@ -4,6 +4,8 @@ export type Project = {
   color: string;
   /** Weekly hours per month, keyed by "YYYY-MM". Months without hours are omitted. */
   hours: Record<string, number>;
+  /** Toggled off: kept in the list but left out of the chart. Absent means on. */
+  hidden?: boolean;
 };
 
 export type Settings = {
@@ -52,6 +54,7 @@ const isProjectList = (v: unknown): v is Project[] =>
       typeof p.name === 'string' &&
       typeof p.color === 'string' &&
       isObject(p.hours) &&
+      (p.hidden === undefined || typeof p.hidden === 'boolean') &&
       Object.values(p.hours).every((h) => isNumber(h) && h >= 0),
   );
 

@@ -155,7 +155,7 @@ export default function App() {
         />
         <Timeline
           months={months}
-          projects={projects}
+          projects={projects.filter((p) => !p.hidden)}
           settings={data.settings}
           currentKey={currentKey}
           onSettingsChange={changeSettings}

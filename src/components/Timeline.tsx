@@ -222,7 +222,7 @@ export function Timeline({ months, projects, settings, currentKey, onSettingsCha
         </svg>
         )}
 
-        {projects.length === 0 && <div className="chart-empty">Add a project to start planning your year.</div>}
+        {projects.length === 0 && <div className="chart-empty">Add a project, or switch one on, to start planning your year.</div>}
 
         {hover !== null && projects.length > 0 && (
           <Tooltip

@@ -48,7 +48,7 @@ export function ProjectPanel({ projects, months, currentKey, selectedId, onSelec
           {months[11].year}.
         </p>
       ) : (
-        <p className="hint">Drag to reorder. The top project sits on top of the chart.</p>
+        <p className="hint">Drag to reorder. The top project sits on top of the chart. Switch a project off to leave it out.</p>
       )}
 
       <ol className="project-list">
@@ -57,6 +57,7 @@ export function ProjectPanel({ projects, months, currentKey, selectedId, onSelec
           const classes = [
             'project',
             selected && 'selected',
+            p.hidden && 'off',
             dragIndex === i && 'dragging',
             dropIndex === i && dragIndex !== null && 'drop-before',
             dropIndex === projects.length && i === projects.length - 1 && dragIndex !== null && 'drop-after',
@@ -120,6 +121,16 @@ export function ProjectPanel({ projects, months, currentKey, selectedId, onSelec
                 <span className="swatch" style={{ background: p.color }} />
                 <span className="project-name">{p.name || 'Untitled'}</span>
                 <span className="project-meta">{summary(p, months, currentKey)}</span>
+                <input
+                  type="checkbox"
+                  role="switch"
+                  className="switch"
+                  checked={!p.hidden}
+                  aria-label={`Show ${p.name || 'Untitled'} on the chart`}
+                  title={p.hidden ? 'Off: not on the chart' : 'On: shown on the chart'}
+                  onClick={(e) => e.stopPropagation()}
+                  onChange={(e) => onChange({ ...p, hidden: !e.target.checked })}
+                />
               </div>
               {selected && (
                 <ProjectEditor project={p} months={months} onChange={onChange} onDelete={() => onDelete(p.id)} />
